@@ -1,3 +1,14 @@
+Color Scheme from https://designshack.net/articles/inspiration/designing-in-the-dark-10-dark-sites-and-their-color-schemes/
+Rails.mx
+
+ #AB0000
+ #D75813
+ #000000
+ #5B6073
+ #1c1f24
+ 
+
+
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
 
 Below you'll find information about performing common tasks. The most recent version of this guide is available [here](https://github.com/react-community/create-react-native-app/blob/master/react-native-scripts/template/README.md).
