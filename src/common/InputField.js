@@ -1,8 +1,12 @@
 import React from 'react'
 import { TextInput, View, Text } from 'react-native'
 
-const InputField = ({ label, value, onChangeText, placeholder, secureTextEntry, keyboardType }) => {
-  const { inputStyle, labelStyle, containerStyle } = styles
+const InputField = ({ label, value, onChangeText, placeholder, secureTextEntry, keyboardType, maxLength, returnKeyType }) => {
+  const {
+    inputStyle,
+    labelStyle,
+    containerStyle
+  } = styles
 
   return (
     <View style={containerStyle}>
@@ -12,6 +16,8 @@ const InputField = ({ label, value, onChangeText, placeholder, secureTextEntry, 
         placeholder={placeholder}
         autoCorrect={false}
         keyboardType={keyboardType}
+        returnKeyType={returnKeyType}
+        maxLength={maxLength}
         style={inputStyle}
         value={value}
         onChangeText={onChangeText}
@@ -22,7 +28,7 @@ const InputField = ({ label, value, onChangeText, placeholder, secureTextEntry, 
 
 const styles = {
   inputStyle: {
-    color: '#d2d4d5',
+    color: '#fff',
     paddingRight: 5,
     paddingLeft: 5,
     fontSize: 18,

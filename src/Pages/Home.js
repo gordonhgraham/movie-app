@@ -1,38 +1,73 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
 import { Button, Header, InputField } from '../common';
 
 export default class App extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state ={
+      inputYear: ""
+    }
+  }
+
   static navigationOptions = {
     title: 'Movies By Year',
   }
 
   render() {
     const { navigate } = this.props.navigation;
-    const { container, buttonContainerStyle, textStyle } = styles;
+    const {
+      container,
+      buttonContainerStyle,
+      textStyle,
+      headingStyle,
+      bodyText,
+    } = styles;
+
     return (
-      <View>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={container}>
+
           <Text style={textStyle}>
-            <Text>Search for popular movies by the year they were released. Please enter a year to get started.</Text>
+            <Text style={headingStyle}>{'\n'}{'\n'}Search for popular movies by the year they were released.</Text>
+            <Text>{'\n'}{'\n'}</Text>
+            <Text style={bodyText}>Please enter a year to get started.</Text>
           </Text>
+
+          <InputField
+            placeholder={"1987"}
+            keyboardType={"numeric"}
+            maxLength={4}
+            returnKeyType={'next'}
+            onChangeText={inputYear => {
+              this.setState({inputYear})
+            }}
+            value={this.state.inputYear}
+          />
+
           <View style={buttonContainerStyle}>
             <Button
-              onPress={()=> navigate('MovieList') }
-            >Movie List</Button>
+              onPress={()=> {
+                console.log("inputYear", this.state.inputYear);
+                // make API call with this.state.inputYear
+                navigate('MovieList')
+              }}
+            >Search</Button>
           </View>
+
         </View>
-      </View>
+      </TouchableWithoutFeedback>
     )
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
-    backgroundColor: '#1c1f24',
+    flex: 1,
+    // backgroundColor: '#1c1f24',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -48,5 +83,14 @@ const styles = StyleSheet.create({
   textStyle: {
     color: "#5b6073",
     fontSize: 20,
+    textAlign: 'center',
+  },
+
+  headingStyle: {
+    fontSize: 30
+  },
+
+  bodyText: {
+    fontSize: 20
   },
 });

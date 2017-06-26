@@ -1,23 +1,32 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, ListView, View } from 'react-native';
 
-import { Button } from '../common'
+import { Button, Card, CardSection } from '../common'
 
 export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+
+    this.state = {
+      dataSource: ds.cloneWithRows(['row 1', 'row 2', 'row 3', 'row 4', 'row 5', 'row 6']),
+    };
+  }
+
   static navigationOptions = {
     title: 'MovieList',
   }
+
 
   render() {
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
-        <Text>Hello World--MoveList Page</Text>
-        <View style={styles.buttonContainerStyle}>
-          <Button
-            onPress={ ()=> navigate('Movie') }
-          >Movie</Button>
-        </View>
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={(data) => <Card><CardSection><Text>{data}</Text></CardSection></Card>}
+        />
       </View>
     );
   }
