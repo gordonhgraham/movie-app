@@ -1,49 +1,83 @@
 import React from 'react';
-import { StyleSheet, Text, ListView, View } from 'react-native';
+import {StyleSheet, Text, ListView, View} from 'react-native';
 
-import { Button, Card, CardSection } from '../common'
+import {Button} from '../common'
+import {MovieTile} from '../components/MovieTile'
 
-export default class App extends React.Component {
-  constructor(props) {
-    super(props);
+export default class MovieList extends React.Component {
+    constructor(props) {
+        super(props);
 
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+        const ds = new ListView.DataSource({
+            rowHasChanged: (r1, r2) => r1 !== r2
+        });
 
-    this.state = {
-      dataSource: ds.cloneWithRows(['row 1', 'row 2', 'row 3', 'row 4', 'row 5', 'row 6']),
-    };
-  }
+        this.state = {
+            dataSource: ds.cloneWithRows([
+                {
+                    title: '1 Mad Max Fury Road',
+                    creators: 'Zack Gibson',
+                    actors: 'Yon Nuta',
+                    poster: 'https://image.tmdb.org/t/p/w500/kqjL17yufvn9OVLyXYpvtyrFfak.jpg'
+                }, {
+                    title: '2 Mad Max Fury Road',
+                    creators: 'Zack Gibson',
+                    actors: 'Yon Nuta',
+                    poster: 'https://image.tmdb.org/t/p/w500/kqjL17yufvn9OVLyXYpvtyrFfak.jpg'
+                }, {
+                    title: '3 Mad Max Fury Road',
+                    creators: 'Zack Gibson',
+                    actors: 'Yon Nuta',
+                    poster: 'https://image.tmdb.org/t/p/w500/kqjL17yufvn9OVLyXYpvtyrFfak.jpg'
+                }, {
+                    title: '4 Mad Max Fury Road',
+                    creators: 'Zack Gibson',
+                    actors: 'Yon Nuta',
+                    poster: 'https://image.tmdb.org/t/p/w500/kqjL17yufvn9OVLyXYpvtyrFfak.jpg'
+                }, {
+                    title: '5 Mad Max Fury Road',
+                    creators: 'Zack Gibson',
+                    actors: 'Yon Nuta',
+                    poster: 'https://image.tmdb.org/t/p/w500/kqjL17yufvn9OVLyXYpvtyrFfak.jpg'
+                }, {
+                    title: '6 Mad Max Fury Road',
+                    creators: 'Zack Gibson',
+                    actors: 'Yon Nuta',
+                    poster: 'https://image.tmdb.org/t/p/w500/kqjL17yufvn9OVLyXYpvtyrFfak.jpg'
+                }, {
+                    title: '7 Mad Max Fury Road',
+                    creators: 'Zack Gibson',
+                    actors: 'Yon Nuta',
+                    poster: 'https://image.tmdb.org/t/p/w500/kqjL17yufvn9OVLyXYpvtyrFfak.jpg'
+                }
 
-  static navigationOptions = {
-    title: 'MovieList',
-  }
+            ])
+        };
+    }
 
+    static navigationOptions = {
+        title: 'MovieList'
+    }
 
-  render() {
-    const { navigate } = this.props.navigation;
-    return (
-      <View style={styles.container}>
-        <ListView
-          dataSource={this.state.dataSource}
-          renderRow={(data) => <Card><CardSection><Text>{data}</Text></CardSection></Card>}
-        />
-      </View>
-    );
-  }
+    render() {
+        const {navigate} = this.props.navigation;
+        return (
+            <View style={styles.container}>
+                <ListView
+                  dataSource={this.state.dataSource}
+                  renderRow={data => <MovieTile>{data}</MovieTile>}
+                />
+            </View>
+        )
+    }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  buttonContainerStyle: {
-    paddingTop: 15,
-    height: 50,
-    width: 100,
-    alignSelf: 'center',
-    alignItems: 'center'
-  },
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+        alignItems: 'stretch',
+    },
 });

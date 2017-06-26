@@ -4,7 +4,7 @@ import { StackNavigator } from 'react-navigation';
 
 import { Button, Header, InputField } from '../common';
 
-export default class App extends React.Component {
+export default class Home extends React.Component {
   constructor(props) {
     super(props)
 
@@ -52,7 +52,7 @@ export default class App extends React.Component {
             <Button
               onPress={()=> {
                 console.log("inputYear", this.state.inputYear);
-                // make API call with this.state.inputYear
+                // make initial API get request with this.state.inputYear
                 navigate('MovieList')
               }}
             >Search</Button>
