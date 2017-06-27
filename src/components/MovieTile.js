@@ -3,7 +3,7 @@ import { View, Text, Image, TouchableOpacity } from 'react-native'
 
 const MovieTile = ({ children }) => {
   return (
-    <TouchableOpacity style={styles.containerStyle}>
+    <TouchableOpacity style={styles.containerStyle} onPress={() => console.log(children.id)}>
       <View style={styles.imgContainerStyle}>
         <Image
           style={{width: 113, height: 172}}
@@ -12,6 +12,7 @@ const MovieTile = ({ children }) => {
       </View>
       <View style={styles.copyStyle}>
         <Text style={styles.headingStyle}>Title:</Text><Text>{children.title}{'\n'}</Text>
+        <Text style={styles.headingStyle}>Release Date</Text><Text>{children.release_date}{'\n'}</Text>
         {/* <Text style={styles.headingStyle}>Creators:</Text><Text>{children.creators}{'\n'}</Text>
         <Text style={styles.headingStyle}>Actors:</Text><Text>{children.actors}</Text> */}
       </View>

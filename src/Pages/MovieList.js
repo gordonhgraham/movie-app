@@ -19,13 +19,9 @@ export default class MovieList extends React.Component {
         };
     }
 
-    static navigationOptions = {
-        title: 'MovieList'
-    }
-
-    componentWillMount() {
-      // console.log('nav state params', this.props.navigation.state.params.inputYear);
-    }
+    static navigationOptions = ({ navigation }) => ({
+        title: `Popular Movies from ${navigation.state.params.inputYear}`
+    })
 
     componentDidMount() {
       return fetch(`https://api.themoviedb.org/3/discover/movie?api_key=API_KEY_REMOVED&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&primary_release_year=${this.state.inputYear}`)
@@ -39,7 +35,8 @@ export default class MovieList extends React.Component {
                 return ({
                   id: results.id,
                   title: results.title,
-                  poster_path: results.poster_path
+                  poster_path: results.poster_path,
+                  release_date: results.release_date
                 })
               })
             ),

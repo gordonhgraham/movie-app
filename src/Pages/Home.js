@@ -14,7 +14,7 @@ export default class Home extends React.Component {
   }
 
   static navigationOptions = {
-    title: 'Movies By Year',
+    title: 'Popular Movies By Year',
   }
 
   render() {
