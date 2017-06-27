@@ -7,13 +7,13 @@ const MovieTile = ({ children }) => {
       <View style={styles.imgContainerStyle}>
         <Image
           style={{width: 113, height: 172}}
-          source={{uri: `${children.poster}`}}
+          source={{uri: `https://image.tmdb.org/t/p/w500${children.poster_path}`}}
         />
       </View>
       <View style={styles.copyStyle}>
         <Text style={styles.headingStyle}>Title:</Text><Text>{children.title}{'\n'}</Text>
-        <Text style={styles.headingStyle}>Creators:</Text><Text>{children.creators}{'\n'}</Text>
-        <Text style={styles.headingStyle}>Actors:</Text><Text>{children.actors}</Text>
+        {/* <Text style={styles.headingStyle}>Creators:</Text><Text>{children.creators}{'\n'}</Text>
+        <Text style={styles.headingStyle}>Actors:</Text><Text>{children.actors}</Text> */}
       </View>
     </TouchableOpacity>
   )
