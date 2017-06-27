@@ -53,7 +53,7 @@ export default class Home extends React.Component {
               onPress={()=> {
                 console.log("inputYear", this.state.inputYear);
                 // make initial API get request with this.state.inputYear
-                navigate('MovieList')
+                navigate('MovieList', { inputYear: this.state.inputYear })
               }}
             >Search</Button>
           </View>

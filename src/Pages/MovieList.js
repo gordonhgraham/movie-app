@@ -14,6 +14,7 @@ export default class MovieList extends React.Component {
 
         this.state = {
             isLoading : true,
+            inputYear: this.props.navigation.state.params.inputYear,
             dataSource: [],
         };
     }
@@ -22,8 +23,12 @@ export default class MovieList extends React.Component {
         title: 'MovieList'
     }
 
+    componentWillMount() {
+      // console.log('nav state params', this.props.navigation.state.params.inputYear);
+    }
+
     componentDidMount() {
-      return fetch('https://api.themoviedb.org/3/discover/movie?api_key=API_KEY_REMOVED&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&primary_release_year=1987')
+      return fetch(`https://api.themoviedb.org/3/discover/movie?api_key=API_KEY_REMOVED&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&primary_release_year=${this.state.inputYear}`)
         .then((response) => response.json())
         .then((responseJson) => {
           let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
