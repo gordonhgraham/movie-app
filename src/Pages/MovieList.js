@@ -2,7 +2,8 @@ import React from 'react';
 import {StyleSheet, Text, ListView, View} from 'react-native';
 
 import {Button, Spinner} from '../common'
-import {MovieTile} from '../components/MovieTile'
+import MovieTile from '../components/MovieTile'
+
 
 export default class MovieList extends React.Component {
     constructor(props) {
@@ -50,23 +51,29 @@ export default class MovieList extends React.Component {
   }
 
     render() {
-        const {navigate} = this.props.navigation;
-
-        if (this.state.isLoading) {
-          return (
-            <Spinner />
-          )
-        }
-        else {
-          return (
-              <View style={styles.container}>
-                  <ListView
-                    dataSource={this.state.dataSource}
-                    renderRow={data => <MovieTile>{data}</MovieTile>}
-                  />
-              </View>
-          )
-        }
+      const { navigate } = this.props.navigation;
+      if (this.state.isLoading) {
+        return (
+          <Spinner />
+        )
+      }
+      else {
+        return (
+            <View style={styles.container}>
+                <ListView
+                  dataSource={this.state.dataSource}
+                  renderRow={data => {
+                    return(
+                      <MovieTile
+                        onPress={() => navigate('Movie', { movieData: data })}
+                        data={data}
+                      />
+                    )
+                  }}
+                />
+            </View>
+        )
+      }
     }
 }
 

@@ -1,23 +1,34 @@
 import React from 'react'
 import { View, Text, Image, TouchableOpacity } from 'react-native'
+import { StackNavigator } from 'react-navigation';
 
-const MovieTile = ({ children }) => {
-  return (
-    <TouchableOpacity style={styles.containerStyle} onPress={() => console.log(children.id)}>
-      <View style={styles.imgContainerStyle}>
-        <Image
-          style={{width: 113, height: 172}}
-          source={{uri: `https://image.tmdb.org/t/p/w500${children.poster_path}`}}
-        />
-      </View>
-      <View style={styles.copyStyle}>
-        <Text style={styles.headingStyle}>Title:</Text><Text>{children.title}{'\n'}</Text>
-        <Text style={styles.headingStyle}>Release Date</Text><Text>{children.release_date}{'\n'}</Text>
-        {/* <Text style={styles.headingStyle}>Creators:</Text><Text>{children.creators}{'\n'}</Text>
-        <Text style={styles.headingStyle}>Actors:</Text><Text>{children.actors}</Text> */}
-      </View>
-    </TouchableOpacity>
-  )
+export default class MovieTile extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      movieInfo: this.props.data,
+    }
+  }
+
+  render () {
+    return (
+      <TouchableOpacity style={styles.containerStyle} onPress={this.props.onPress}>
+        <View style={styles.imgContainerStyle}>
+          <Image
+            style={{width: 113, height: 172}}
+            source={{uri: `https://image.tmdb.org/t/p/w500${this.state.movieInfo.poster_path}`}}
+          />
+        </View>
+        <View style={styles.copyStyle}>
+          <Text style={styles.headingStyle}>Title:</Text><Text>{this.state.movieInfo.title}{'\n'}</Text>
+          <Text style={styles.headingStyle}>Release Date</Text><Text>{this.state.movieInfo.release_date}{'\n'}</Text>
+          {/* <Text style={styles.headingStyle}>Creators:</Text><Text>{this.props.children.creators}{'\n'}</Text>
+          <Text style={styles.headingStyle}>Actors:</Text><Text>{this.props.children.actors}</Text> */}
+        </View>
+      </TouchableOpacity>
+    )
+  }
 }
 
 const styles = {
@@ -45,5 +56,3 @@ const styles = {
     fontSize: 20
   }
 }
-
-export { MovieTile }

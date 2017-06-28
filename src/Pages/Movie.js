@@ -1,15 +1,19 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-export default class App extends React.Component {
-  static navigationOptions = {
-    title: 'Movie',
+export default class Movie extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      movieData: this.props.navigation.state.params.movieData
+    }
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <Text>Hello World--Move Page</Text>
+        <Text>Title: {this.state.movieData.title}</Text>
       </View>
     );
   }
