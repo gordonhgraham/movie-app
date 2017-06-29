@@ -7,22 +7,23 @@ export default class MovieTile extends React.Component {
     super(props)
 
     this.state = {
-      movieInfo: this.props.data,
+      movieData: this.props.data,
     }
   }
 
   render () {
+    console.log('movieData', this.state.movieData);
     return (
       <TouchableOpacity style={styles.containerStyle} onPress={this.props.onPress}>
         <View style={styles.imgContainerStyle}>
           <Image
             style={{width: 113, height: 172}}
-            source={{uri: `https://image.tmdb.org/t/p/w500${this.state.movieInfo.poster_path}`}}
+            source={{uri: `https://image.tmdb.org/t/p/w500${this.state.movieData.poster_path}`}}
           />
         </View>
         <View style={styles.copyStyle}>
-          <Text style={styles.headingStyle}>Title:</Text><Text>{this.state.movieInfo.title}{'\n'}</Text>
-          <Text style={styles.headingStyle}>Release Date</Text><Text>{this.state.movieInfo.release_date}{'\n'}</Text>
+          <Text style={styles.headingStyle}>Title:</Text><Text>{this.state.movieData.title}{'\n'}</Text>
+          {/* <Text style={styles.headingStyle}>Release Date</Text><Text>{this.state.movieData.release_date}{'\n'}</Text> */}
           {/* <Text style={styles.headingStyle}>Creators:</Text><Text>{this.props.children.creators}{'\n'}</Text>
           <Text style={styles.headingStyle}>Actors:</Text><Text>{this.props.children.actors}</Text> */}
         </View>

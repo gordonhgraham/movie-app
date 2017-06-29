@@ -38,7 +38,9 @@ export default class MovieList extends React.Component {
                   id: results.id,
                   title: results.title,
                   poster_path: results.poster_path,
-                  release_date: results.release_date
+                  backdrop_path: results.backdrop_path,
+                  release_date: results.release_date,
+                  description: results.overview,
                 })
               })
             ),
