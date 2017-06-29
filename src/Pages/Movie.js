@@ -13,7 +13,9 @@ export default class Movie extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Title: {this.state.movieData.title}</Text>
+        <Text>
+          <Text style={styles.headingStyle}>{this.state.movieData.title}</Text>
+        </Text>
       </View>
     );
   }
@@ -26,4 +28,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  headingStyle: {
+    fontSize: 30,
+  }
 });

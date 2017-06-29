@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, ListView, View} from 'react-native';
+import Config from '../../config.js'
 
 import {Button, Spinner} from '../common'
 import MovieTile from '../components/MovieTile'
@@ -25,7 +26,7 @@ export default class MovieList extends React.Component {
     })
 
     componentDidMount() {
-      return fetch(`https://api.themoviedb.org/3/discover/movie?api_key=API_KEY_REMOVED&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&primary_release_year=${this.state.inputYear}`)
+      return fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${Config.api_Key}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&primary_release_year=${this.state.inputYear}`)
         .then((response) => response.json())
         .then((responseJson) => {
           let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
