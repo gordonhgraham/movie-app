@@ -1,5 +1,5 @@
-import React from 'react';
-import { StyleSheet, Text, View, Image, Dimensions, Linking } from 'react-native';
+import React from 'react'
+import { Dimensions, Image, Linking, StyleSheet, Text, View } from 'react-native'
 
 import Config from '../../config'
 import { Spinner } from '../common/index'
@@ -9,13 +9,13 @@ export default class Movie extends React.Component {
     super(props)
 
     this.state = {
+      actors: [],
+      creators: [],
+      directors: [],
+      genre: [],
+      homepage: '',
       isLoading: true,
       movieData: this.props.navigation.state.params.movieData,
-      genre: [],
-      actors: [],
-      homepage: '',
-      directors: [],
-      creators: [],
     }
   }
 
@@ -24,51 +24,51 @@ export default class Movie extends React.Component {
     return false
   }
 
+  renderDate(dateStr) {
+    const
+    months =
+    ['January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December'],
+    [year, month, date] = dateStr.split("-"),
+    day = date.replace(/^0+/, '')
+    return `${months[month-1]} ${day}, ${year}`
+  }
+
   componentDidMount() {
     return fetch(`https://api.themoviedb.org/3/movie/${this.state.movieData.id}?api_key=${Config.api_Key}&language=en-US&append_to_response=credits`)
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({
-          isLoading: false,
+          actors: responseJson.credits.cast.filter(cast => cast.order < 3 ),
+          creators: responseJson.credits.crew.filter(c => this.isJobTitle(c, 'Creator')).map(c => c.name),
+          directors: responseJson.credits.crew.filter(c => this.isJobTitle(c, 'Director')).map(c => c.name),
           genre: responseJson.genres,
           homepage: responseJson.homepage,
-          actors: responseJson.credits.cast.filter(cast => cast.order < 3 ),
-          directors: responseJson.credits.crew.filter(c => this.isJobTitle(c, 'Director')).map(c => c.name),
-          creators: responseJson.credits.crew.filter(c => this.isJobTitle(c, 'Creator')).map(c => c.name),
+          isLoading: false,
         })
       })
       .catch((error) => {
-        console.error(error);
-      });
-}
-
-  renderDate(dateStr) {
-    const
-      months =
-        ['January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December'],
-      [year, month, date] = dateStr.split("-"),
-      day = date.replace(/^0+/, '')
-    return `${months[month-1]} ${day}, ${year}`
-}
+        console.error(error)
+      })
+  }
 
   render() {
     const {
       container,
-      imageContainer,
+      descriptionStyle,
       headingStyle,
+      imageContainer,
       subHeadingStyle,
-      descriptionStyle
     } = styles
 
     if (this.state.isLoading) {
@@ -85,7 +85,7 @@ export default class Movie extends React.Component {
                 width: Dimensions.get('window').width,
                 height: (0.5625*Dimensions.get('window').width)
               }}
-              source={{uri: `https://image.tmdb.org/t/p/w500${this.state.movieData.backdrop_path}`}}
+              source={{ uri: `https://image.tmdb.org/t/p/w500${this.state.movieData.backdrop_path}` }}
             />
           </View>
           <View>
@@ -94,13 +94,13 @@ export default class Movie extends React.Component {
               <Text style={subHeadingStyle}>{'\n'}Released {this.renderDate(this.state.movieData.release_date)}</Text>
               <Text style={descriptionStyle}>{'\n'}{this.state.movieData.description}</Text>
 
-              { this.state.genre.length > 0 && <Text>{'\n'}Genre:</Text> }
+              { this.state.genre.length > 0 && <Text>{'\n'}Genre: </Text> }
               {this.state.genre.map(genre => <Text>{genre.name} </Text> ) }
 
-              { this.state.directors.length > 0 && <Text>{'\n'}Directed by:</Text> }
+              { this.state.directors.length > 0 && <Text>{'\n'}Directed by: </Text> }
               {this.state.directors.map(directors => <Text>{directors} </Text> ) }
 
-              { this.state.creators.length > 0 && <Text>{'\n'}Created by:</Text> }
+              { this.state.creators.length > 0 && <Text>{'\n'}Created by: </Text> }
               { this.state.creators.map(creators => <Text>{creators}</Text> ) }
 
               <Text>{'\n'}Cast:{'\n'}</Text>
@@ -109,6 +109,7 @@ export default class Movie extends React.Component {
                   <Text>{actor.character} played by {actor.name}{'\n'}</Text>
                 )
               })}
+
               <Text
                 style={{color: 'blue'}}
                 onPress={() => Linking.openURL(this.state.homepage)}
@@ -129,6 +130,10 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     // justifyContent: 'center',
   },
+  descriptionStyle: {},
+  headingStyle: {
+    fontSize: 30,
+  },
   imageContainer: {
     // flex: 1,
     // alignItems: 'stretch',
@@ -136,11 +141,7 @@ const styles = StyleSheet.create({
     // borderColor: 'blue',
     // borderWidth: 3
   },
-  headingStyle: {
-    fontSize: 30,
-  },
   subHeadingStyle: {
     fontSize: 20,
   },
-  descriptionStyle: {},
-});
+})

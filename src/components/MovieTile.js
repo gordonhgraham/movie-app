@@ -1,6 +1,6 @@
 import React from 'react'
-import { View, Text, Image, TouchableOpacity } from 'react-native'
-import { StackNavigator } from 'react-navigation';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { StackNavigator } from 'react-navigation'
 
 export default class MovieTile extends React.Component {
   constructor(props) {
@@ -12,26 +12,33 @@ export default class MovieTile extends React.Component {
   }
 
   render () {
+    const {
+      containerStyle,
+      copyStyle,
+      imgContainerStyle,
+      headingStyle,
+    } = styles
+
     return (
-      <TouchableOpacity style={styles.containerStyle} onPress={this.props.onPress}>
-        <View style={styles.imgContainerStyle}>
+      <TouchableOpacity style={containerStyle} onPress={this.props.onPress}>
+        <View style={imgContainerStyle}>
           <Image
-            style={{width: 113, height: 172}}
-            source={{uri: `https://image.tmdb.org/t/p/w500${this.state.movieData.poster_path}`}}
+            style={{ width: 113, height: 172 }}
+            source={{ uri: `https://image.tmdb.org/t/p/w500${this.state.movieData.poster_path}` }}
           />
         </View>
-        <View style={styles.copyStyle}>
-          <Text style={styles.headingStyle}>Title:</Text><Text>{this.state.movieData.title}{'\n'}</Text>
-          {/* <Text style={styles.headingStyle}>Release Date</Text><Text>{this.state.movieData.release_date}{'\n'}</Text> */}
-          {/* <Text style={styles.headingStyle}>Creators:</Text><Text>{this.props.children.creators}{'\n'}</Text>
-          <Text style={styles.headingStyle}>Actors:</Text><Text>{this.props.children.actors}</Text> */}
+        <View style={copyStyle}>
+          <Text style={headingStyle}>Title:</Text><Text>{this.state.movieData.title}{'\n'}</Text>
+          {/* <Text style={headingStyle}>Release Date</Text><Text>{this.state.movieData.release_date}{'\n'}</Text> */}
+          {/* <Text style={headingStyle}>Creators:</Text><Text>{this.props.children.creators}{'\n'}</Text>
+          <Text style={headingStyle}>Actors:</Text><Text>{this.props.children.actors}</Text> */}
         </View>
       </TouchableOpacity>
     )
   }
 }
 
-const styles = {
+const styles = StyleSheet.create({
   containerStyle: {
     borderWidth: 1,
     borderRadius: 2,
@@ -52,7 +59,8 @@ const styles = {
   copyStyle: {
     marginLeft: 10,
   },
+  imgContainerStyle: {},
   headingStyle: {
-    fontSize: 20
-  }
-}
+    fontSize: 20,
+  },
+})
