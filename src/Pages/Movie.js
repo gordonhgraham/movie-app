@@ -2,33 +2,39 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, Dimensions, Linking } from 'react-native';
 
 import Config from '../../config'
+import { Spinner } from '../common/index'
 
 export default class Movie extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = {
+      isLoading: true,
       movieData: this.props.navigation.state.params.movieData,
       genre: [],
       actors: [],
       homepage: '',
-      director: '',
-      creator: '',
+      directors: [],
+      creators: [],
     }
   }
 
-
+  isJobTitle({job}, jobTitle) {
+    if (job == jobTitle) { return true }
+    return false
+  }
 
   componentDidMount() {
     return fetch(`https://api.themoviedb.org/3/movie/${this.state.movieData.id}?api_key=${Config.api_Key}&language=en-US&append_to_response=credits`)
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({
+          isLoading: false,
           genre: responseJson.genres,
           homepage: responseJson.homepage,
           actors: responseJson.credits.cast.filter(cast => cast.order < 3 ),
-          // director: (if (responseJson.credits.crew.job == 'Director') {responseJson.credits.crew.name}),
-          // creator: responseJson.credits.crew.creator,
+          directors: responseJson.credits.crew.filter(c => this.isJobTitle(c, 'Director')).map(c => c.name),
+          creators: responseJson.credits.crew.filter(c => this.isJobTitle(c, 'Creator')).map(c => c.name),
         })
       })
       .catch((error) => {
@@ -57,7 +63,6 @@ export default class Movie extends React.Component {
 }
 
   render() {
-    console.log(this.state);
     const {
       container,
       imageContainer,
@@ -66,46 +71,54 @@ export default class Movie extends React.Component {
       descriptionStyle
     } = styles
 
-    return (
-      <View style={container}>
-        <View style={imageContainer}>
-          <Image
-            style={{
-              width: Dimensions.get('window').width,
-              height: (0.5625*Dimensions.get('window').width)
-            }}
-            source={{uri: `https://image.tmdb.org/t/p/w500${this.state.movieData.backdrop_path}`}}
-          />
-        </View>
-        <View>
-          <Text>
-            <Text style={headingStyle}>{this.state.movieData.title}</Text>
-            <Text style={subHeadingStyle}>{'\n'}Released {this.renderDate(this.state.movieData.release_date)}</Text>
-            <Text style={descriptionStyle}>{'\n'}{this.state.movieData.description}</Text>
-            <Text>{'\n'}{'\n'}Genre:{'\n'}</Text>
-            {this.state.genre.map(genre => {
-              return (
-                <Text>{genre.name} </Text>
-              )
-            })}
-            <Text>{'\n'}{'\n'}Director: {this.state.director}</Text>
-            <Text>{'\n'}{'\n'}Creator: {this.state.creator}</Text>
+    if (this.state.isLoading) {
+      return (
+        <Spinner />
+      )
+    }
+    else {
+      return (
+        <View style={container}>
+          <View style={imageContainer}>
+            <Image
+              style={{
+                width: Dimensions.get('window').width,
+                height: (0.5625*Dimensions.get('window').width)
+              }}
+              source={{uri: `https://image.tmdb.org/t/p/w500${this.state.movieData.backdrop_path}`}}
+            />
+          </View>
+          <View>
+            <Text>
+              <Text style={headingStyle}>{this.state.movieData.title}</Text>
+              <Text style={subHeadingStyle}>{'\n'}Released {this.renderDate(this.state.movieData.release_date)}</Text>
+              <Text style={descriptionStyle}>{'\n'}{this.state.movieData.description}</Text>
 
-            <Text>{'\n'}Cast:{'\n'}</Text>
-            {this.state.actors.map(actor => {
-              return (
-                <Text>{actor.character} played by {actor.name}{'\n'}</Text>
-              )
-            })}
-            <Text
-              style={{color: 'blue'}}
-              onPress={() => Linking.openURL(this.state.homepage)}
-            >{'\n'}{'\n'}Visit Movie Website
+              { this.state.genre.length > 0 && <Text>{'\n'}Genre:</Text> }
+              {this.state.genre.map(genre => <Text>{genre.name} </Text> ) }
+
+              { this.state.directors.length > 0 && <Text>{'\n'}Directed by:</Text> }
+              {this.state.directors.map(directors => <Text>{directors} </Text> ) }
+
+              { this.state.creators.length > 0 && <Text>{'\n'}Created by:</Text> }
+              { this.state.creators.map(creators => <Text>{creators}</Text> ) }
+
+              <Text>{'\n'}Cast:{'\n'}</Text>
+              {this.state.actors.map(actor => {
+                return (
+                  <Text>{actor.character} played by {actor.name}{'\n'}</Text>
+                )
+              })}
+              <Text
+                style={{color: 'blue'}}
+                onPress={() => Linking.openURL(this.state.homepage)}
+              >{'\n'}Visit Movie Website
+              </Text>
             </Text>
-          </Text>
+          </View>
         </View>
-      </View>
-    );
+      )
+    }
   }
 }
 
