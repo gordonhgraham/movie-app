@@ -34,7 +34,7 @@ export default class Home extends React.Component {
           <Text style={textStyle}>
             <Text style={headingStyle}>{'\n'}{'\n'}Search for popular movies by the year they were released.</Text>
             <Text>{'\n'}{'\n'}</Text>
-            <Text style={bodyText}>Please enter a year to get started.</Text>
+            <Text style={bodyText}>Please enter a year and tap search.</Text>
           </Text>
 
           <InputField

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Dimensions, Image, Linking, StyleSheet, Text, View } from 'react-native'
+import { Dimensions, ScrollView, Image, Linking, StyleSheet, Text, View } from 'react-native'
 
 import Config from '../../config'
 import { Spinner } from '../common/index'
@@ -69,6 +69,7 @@ export default class Movie extends React.Component {
       headingStyle,
       imageContainer,
       subHeadingStyle,
+      textStyle,
     } = styles
 
     if (this.state.isLoading) {
@@ -88,8 +89,8 @@ export default class Movie extends React.Component {
               source={{ uri: `https://image.tmdb.org/t/p/w500${this.state.movieData.backdrop_path}` }}
             />
           </View>
-          <View>
-            <Text>
+          <ScrollView>
+            <Text style={textStyle}>
               <Text style={headingStyle}>{this.state.movieData.title}</Text>
               <Text style={subHeadingStyle}>{'\n'}Released {this.renderDate(this.state.movieData.release_date)}</Text>
               <Text style={descriptionStyle}>{'\n'}{this.state.movieData.description}</Text>
@@ -103,10 +104,10 @@ export default class Movie extends React.Component {
               { this.state.creators.length > 0 && <Text>{'\n'}Created by: </Text> }
               { this.state.creators.map(creators => <Text>{creators}</Text> ) }
 
-              <Text>{'\n'}Cast:{'\n'}</Text>
+              <Text>{'\n'}Staring:{'\n'}</Text>
               {this.state.actors.map(actor => {
                 return (
-                  <Text>{actor.character} played by {actor.name}{'\n'}</Text>
+                  <Text>{actor.name} as {actor.character}{'\n'}</Text>
                 )
               })}
 
@@ -116,7 +117,7 @@ export default class Movie extends React.Component {
               >{'\n'}Visit Movie Website
               </Text>
             </Text>
-          </View>
+          </ScrollView>
         </View>
       )
     }
@@ -143,5 +144,8 @@ const styles = StyleSheet.create({
   },
   subHeadingStyle: {
     fontSize: 20,
+  },
+  textStyle: {
+    fontSize: 18
   },
 })
