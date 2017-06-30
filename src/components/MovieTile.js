@@ -12,7 +12,6 @@ export default class MovieTile extends React.Component {
   }
 
   render () {
-    console.log('movieData', this.state.movieData);
     return (
       <TouchableOpacity style={styles.containerStyle} onPress={this.props.onPress}>
         <View style={styles.imgContainerStyle}>

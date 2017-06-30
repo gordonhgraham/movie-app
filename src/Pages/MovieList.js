@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, Text, ListView, View} from 'react-native';
 import Config from '../../config.js'
 
-import {Button, Spinner} from '../common'
+import {Button, Spinner, ErrorTile} from '../common'
 import MovieTile from '../components/MovieTile'
 
 
@@ -45,7 +45,7 @@ export default class MovieList extends React.Component {
               })
             ),
           }, function() {
-            // console.log(this.state.dataSource);
+            // console.log(this.state.dataSource)
           });
         })
         .catch((error) => {
@@ -61,6 +61,13 @@ export default class MovieList extends React.Component {
         )
       }
       else {
+        if (this.state.dataSource.getRowCount() == 0) {
+          return (
+            <View style={styles.container}>
+              <ErrorTile>No movies to show. Please search another year.</ErrorTile>
+            </View>
+          )
+        }
         return (
             <View style={styles.container}>
                 <ListView
