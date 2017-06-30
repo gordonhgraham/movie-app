@@ -24,6 +24,20 @@ export default class Movie extends React.Component {
     return false
   }
 
+  renderBackdropImage(path) {
+    if (path != null) {
+      return (
+        <Image
+          style={{
+            width: Dimensions.get('window').width,
+            height: (0.5625*Dimensions.get('window').width)
+          }}
+          source={{ uri: `https://image.tmdb.org/t/p/w500${path}` }}
+        />
+      )
+    }
+  }
+
   renderDate(dateStr) {
     const
     months =
@@ -81,13 +95,7 @@ export default class Movie extends React.Component {
       return (
         <View style={container}>
           <View style={imageContainer}>
-            <Image
-              style={{
-                width: Dimensions.get('window').width,
-                height: (0.5625*Dimensions.get('window').width)
-              }}
-              source={{ uri: `https://image.tmdb.org/t/p/w500${this.state.movieData.backdrop_path}` }}
-            />
+            { this.renderBackdropImage(this.state.movieData.backdrop_path) }
           </View>
           <ScrollView>
             <Text style={textStyle}>
@@ -96,26 +104,18 @@ export default class Movie extends React.Component {
               <Text style={descriptionStyle}>{'\n'}{this.state.movieData.description}</Text>
 
               { this.state.genre.length > 0 && <Text>{'\n'}Genre: </Text> }
-              {this.state.genre.map(genre => <Text>{genre.name} </Text> ) }
+              { this.state.genre.map(genre => <Text>{genre.name} </Text> ) }
 
               { this.state.directors.length > 0 && <Text>{'\n'}Directed by: </Text> }
-              {this.state.directors.map(directors => <Text>{directors} </Text> ) }
+              { this.state.directors.map(directors => <Text>{directors} </Text> ) }
 
               { this.state.creators.length > 0 && <Text>{'\n'}Created by: </Text> }
               { this.state.creators.map(creators => <Text>{creators}</Text> ) }
 
-              <Text>{'\n'}Staring:{'\n'}</Text>
-              {this.state.actors.map(actor => {
-                return (
-                  <Text>{actor.name} as {actor.character}{'\n'}</Text>
-                )
-              })}
+              { this.state.actors.length > 0 && <Text>{'\n'}Staring: </Text> }
+              { this.state.actors.map(actor => <Text>{actor.name} as {actor.character}{'\n'}</Text> ) }
 
-              <Text
-                style={{color: 'blue'}}
-                onPress={() => Linking.openURL(this.state.homepage)}
-              >{'\n'}Visit Movie Website
-              </Text>
+              { this.state.homepage != '' && <Text style={{ color: 'blue' }} onPress={() => Linking.openURL(this.state.homepage)}>{'\n'}Visit Movie Website</Text>}
             </Text>
           </ScrollView>
         </View>
