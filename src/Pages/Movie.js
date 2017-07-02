@@ -25,7 +25,7 @@ export default class Movie extends React.Component {
   }
 
   renderBackdropImage(path) {
-    if (path != null) {
+    if (path != '') {
       return (
         <Image
           style={{
@@ -104,16 +104,16 @@ export default class Movie extends React.Component {
               <Text style={descriptionStyle}>{'\n'}{this.state.movieData.description}</Text>
 
               { this.state.genre.length > 0 && <Text>{'\n'}Genre: </Text> }
-              { this.state.genre.map(genre => <Text>{genre.name} </Text> ) }
+              { this.state.genre.map((genre, index) => <Text key={index}>{genre.name} </Text> ) }
 
               { this.state.directors.length > 0 && <Text>{'\n'}Directed by: </Text> }
-              { this.state.directors.map(directors => <Text>{directors} </Text> ) }
+              { this.state.directors.map((directors, index) => <Text key={index}>{directors} </Text> ) }
 
               { this.state.creators.length > 0 && <Text>{'\n'}Created by: </Text> }
-              { this.state.creators.map(creators => <Text>{creators}</Text> ) }
+              { this.state.creators.map((creators, index) => <Text key={index}>{creators}</Text> ) }
 
               { this.state.actors.length > 0 && <Text>{'\n'}Staring: </Text> }
-              { this.state.actors.map(actor => <Text>{actor.name} as {actor.character}{'\n'}</Text> ) }
+              { this.state.actors.map((actor, index) => <Text key={index}>{actor.name} as {actor.character}{'\n'}</Text> ) }
 
               { this.state.homepage != '' && <Text style={{ color: 'blue' }} onPress={() => Linking.openURL(this.state.homepage)}>{'\n'}Visit Movie Website</Text>}
             </Text>

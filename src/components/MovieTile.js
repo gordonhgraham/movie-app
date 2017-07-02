@@ -29,9 +29,6 @@ export default class MovieTile extends React.Component {
         </View>
         <View style={copyStyle}>
           <Text style={headingStyle}>Title:</Text><Text>{this.state.movieData.title}{'\n'}</Text>
-          {/* <Text style={headingStyle}>Release Date</Text><Text>{this.state.movieData.release_date}{'\n'}</Text> */}
-          {/* <Text style={headingStyle}>Creators:</Text><Text>{this.props.children.creators}{'\n'}</Text>
-          <Text style={headingStyle}>Actors:</Text><Text>{this.props.children.actors}</Text> */}
         </View>
       </TouchableOpacity>
     )

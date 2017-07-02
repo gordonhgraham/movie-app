@@ -24,7 +24,7 @@ export default class MovieList extends React.Component {
       title: `Popular Movies from ${navigation.state.params.inputYear}`
   })
 
-  componentDidMount() {
+  componentWillMount() {
     return fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${Config.api_Key}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&primary_release_year=${this.state.inputYear}`)
       .then((response) => response.json())
       .then((responseJson) => {
