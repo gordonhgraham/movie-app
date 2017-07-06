@@ -23,6 +23,7 @@ export default class MovieTile extends React.Component {
       <TouchableOpacity style={containerStyle} onPress={this.props.onPress}>
         <Image
           style={{
+            // h=1.5185w
             width: (0.5*Dimensions.get('window').width),
             height: (0.7593*Dimensions.get('window').width),
             borderWidth: 12,

@@ -78,12 +78,10 @@ export default class Movie extends React.Component {
 
   render() {
     const {
-      container,
-      descriptionStyle,
-      headingStyle,
-      imageContainer,
-      subHeadingStyle,
+      textContainer,
       textStyle,
+      headingStyle,
+      subHeadingStyle,
     } = styles
 
     if (this.state.isLoading) {
@@ -93,59 +91,48 @@ export default class Movie extends React.Component {
     }
     else {
       return (
-        <View style={container}>
-          <View style={imageContainer}>
+        <ScrollView>
+          <View>
             { this.renderBackdropImage(this.state.movieData.backdrop_path) }
           </View>
-          <ScrollView>
+          <View style={textContainer}>
             <Text style={textStyle}>
               <Text style={headingStyle}>{this.state.movieData.title}</Text>
               <Text style={subHeadingStyle}>{'\n'}Released {this.renderDate(this.state.movieData.release_date)}</Text>
-              <Text style={descriptionStyle}>{'\n'}{this.state.movieData.description}</Text>
+              <Text>{'\n'}{this.state.movieData.description}{'\n'}</Text>
 
-              { this.state.genre.length > 0 && <Text>{'\n'}Genre: </Text> }
-              { this.state.genre.map((genre, index) => <Text key={index}>{genre.name} </Text> ) }
+              { this.state.genre.length > 0 && <Text>{'\n'}Genre:{'\n'}</Text> }
+              { this.state.genre.map((genre, index) => <Text key={index}>{'\u2022'} {genre.name}{'\n'}</Text> ) }
 
               { this.state.directors.length > 0 && <Text>{'\n'}Directed by: </Text> }
-              { this.state.directors.map((directors, index) => <Text key={index}>{directors} </Text> ) }
+              { this.state.directors.map((directors, index) => <Text key={index}>{directors}{'\n'}</Text> ) }
 
               { this.state.creators.length > 0 && <Text>{'\n'}Created by: </Text> }
-              { this.state.creators.map((creators, index) => <Text key={index}>{creators}</Text> ) }
+              { this.state.creators.map((creators, index) => <Text key={index}>{creators}{'\n'}</Text> ) }
 
-              { this.state.actors.length > 0 && <Text>{'\n'}Staring: </Text> }
-              { this.state.actors.map((actor, index) => <Text key={index}>{actor.name} as {actor.character}{'\n'}</Text> ) }
+              { this.state.actors.length > 0 && <Text>{'\n'}Staring:{'\n'}</Text> }
+              { this.state.actors.map((actor, index) => <Text key={index}>{'\u2022'} {actor.name} as {actor.character}{'\n'}</Text> ) }
 
               { this.state.homepage != '' && <Text style={{ color: 'blue' }} onPress={() => Linking.openURL(this.state.homepage)}>{'\n'}Visit Movie Website</Text>}
             </Text>
-          </ScrollView>
-        </View>
+          </View>
+        </ScrollView>
       )
     }
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'flex-start',
-    // justifyContent: 'center',
+  textContainer: {
+    margin: 10,
   },
-  descriptionStyle: {},
+  textStyle: {
+    fontSize: 17
+  },
   headingStyle: {
     fontSize: 30,
   },
-  imageContainer: {
-    // flex: 1,
-    // alignItems: 'stretch',
-    // alignItems: 'flex-start',
-    // borderColor: 'blue',
-    // borderWidth: 3
-  },
   subHeadingStyle: {
     fontSize: 20,
-  },
-  textStyle: {
-    fontSize: 18
   },
 })
