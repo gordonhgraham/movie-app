@@ -53,7 +53,7 @@ export default class MovieList extends React.Component {
   }
 
   render() {
-    const { navigate } = this.props.navigation
+    const { navigate, goBack } = this.props.navigation
 
     if (this.state.isLoading) {
       return (
@@ -63,7 +63,7 @@ export default class MovieList extends React.Component {
     else if (this.state.dataSource.getRowCount() == 0) {
       return (
         <View style={styles.container}>
-          <ErrorTile>No movies to show. Please search another year.</ErrorTile>
+          <ErrorTile onPress={() => goBack()}/>
         </View>
       )
     } else {
