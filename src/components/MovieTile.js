@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { StackNavigator } from 'react-navigation'
 
 export default class MovieTile extends React.Component {
@@ -21,15 +21,16 @@ export default class MovieTile extends React.Component {
 
     return (
       <TouchableOpacity style={containerStyle} onPress={this.props.onPress}>
-        <View style={imgContainerStyle}>
-          <Image
-            style={{ width: 113, height: 172 }}
-            source={{ uri: `https://image.tmdb.org/t/p/w500${this.state.movieData.poster_path}` }}
-          />
-        </View>
-        <View style={copyStyle}>
-          <Text style={headingStyle}>Title:</Text><Text>{this.state.movieData.title}{'\n'}</Text>
-        </View>
+        <Image
+          style={{
+            width: (0.5*Dimensions.get('window').width),
+            height: (0.7593*Dimensions.get('window').width),
+            borderWidth: 12,
+            borderColor: 'black'
+          }}
+          source={{ uri: `https://image.tmdb.org/t/p/w500${this.state.movieData.poster_path}` }}
+        />
+        <Text style={headingStyle}>{this.state.movieData.title}</Text>
       </TouchableOpacity>
     )
   }
@@ -50,14 +51,12 @@ const styles = StyleSheet.create({
     marginRight: 5,
     marginTop: 10,
     flex: 1,
-    flexDirection: 'row',
-    padding: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 15,
   },
-  copyStyle: {
-    marginLeft: 10,
-  },
-  imgContainerStyle: {},
   headingStyle: {
     fontSize: 20,
+    textAlign: 'center',
   },
 })

@@ -9,7 +9,7 @@ export default class Home extends React.Component {
     super(props)
 
     this.state ={
-      inputYear: ""
+      inputYear: 2017
     }
   }
 
@@ -38,7 +38,7 @@ export default class Home extends React.Component {
           </Text>
 
           <InputField
-            placeholder={"1987"}
+            placeholder={"2017"}
             keyboardType={"numeric"}
             maxLength={4}
             returnKeyType={'next'}
@@ -46,13 +46,11 @@ export default class Home extends React.Component {
               this.setState({inputYear})
             }}
             label={'Year'}
-            value={this.state.inputYear}
           />
 
           <View style={buttonContainerStyle}>
             <Button
               onPress={()=> {
-                console.log("inputYear", this.state.inputYear);
                 navigate('MovieList', { inputYear: this.state.inputYear })
               }}
             >Search</Button>
