@@ -1,8 +1,9 @@
 import React from 'react';
+import { StackNavigator } from 'react-navigation';
+
 import Home from './src/Pages/Home'
 import Movie from './src/Pages/Movie'
 import MovieList from './src/Pages/MovieList'
-import { StackNavigator } from 'react-navigation';
 
 const MovieApp = StackNavigator({
   Home: { screen: Home },
@@ -13,7 +14,7 @@ const MovieApp = StackNavigator({
 export default class App extends React.Component {
   render() {
     return (
-      <MovieApp></MovieApp>
+      <MovieApp />
     );
   }
 }

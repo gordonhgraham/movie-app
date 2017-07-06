@@ -23,14 +23,14 @@ const styles = {
     // fontFamily: 'Thonburi-Bold',
   },
   buttonStyle: {
-    flex: 1,
+    // flex: 1,
     alignSelf: 'stretch',
     backgroundColor: '#000000',
     borderRadius: 5,
     borderWidth: 1,
     borderColor: '#000000',
     marginLeft: 5,
-    marginRight: 5
+    marginRight: 5,
   }
 }
 export { Button }

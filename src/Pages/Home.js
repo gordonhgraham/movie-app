@@ -45,6 +45,7 @@ export default class Home extends React.Component {
             onChangeText={inputYear => {
               this.setState({inputYear})
             }}
+            label={'Year'}
             value={this.state.inputYear}
           />
 
@@ -69,20 +70,28 @@ const styles = StyleSheet.create({
     // backgroundColor: '#1c1f24',
     alignItems: 'center',
     justifyContent: 'center',
+    // borderWidth: 3,
+    // borderColor: 'blue',
   },
 
   buttonContainerStyle: {
     paddingTop: 15,
-    height: 50,
+    // height: 50,
     width: 100,
-    alignSelf: 'center',
-    alignItems: 'center'
+    // alignSelf: 'center',
+    // alignItems: 'center'
+    // flex: 1,
+    // borderWidth: 3,
+    // borderColor: 'blue',
   },
 
   textStyle: {
     color: "#5b6073",
     fontSize: 20,
     textAlign: 'center',
+    // flex: 1,
+    // borderWidth: 3,
+    // borderColor: 'blue',
   },
 
   headingStyle: {
