@@ -1,14 +1,14 @@
-import React from 'react';
-import { StyleSheet, Text, View, Keyboard, TouchableWithoutFeedback } from 'react-native';
-import { StackNavigator } from 'react-navigation';
+import React from 'react'
+import { StyleSheet, Text, View, Keyboard, TouchableWithoutFeedback } from 'react-native'
+import { StackNavigator } from 'react-navigation'
 
-import { Button, Header, InputField } from '../common';
+import { Button, InputField } from '../common'
 
 export default class Home extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state ={
+    this.state = {
       inputYear: 2017
     }
   }
@@ -18,23 +18,27 @@ export default class Home extends React.Component {
   }
 
   render() {
-    const { navigate } = this.props.navigation;
+    const { navigate } = this.props.navigation
     const {
       container,
       buttonContainerStyle,
       textStyle,
       headingStyle,
       bodyText,
-    } = styles;
+    } = styles
 
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={container}>
 
           <Text style={textStyle}>
-            <Text style={headingStyle}>{'\n'}{'\n'}Search for popular movies by the year they were released.</Text>
+            <Text style={headingStyle}>
+              {'\n'}{'\n'}Search for popular movies by the year they were released.
+            </Text>
             <Text>{'\n'}{'\n'}</Text>
-            <Text style={bodyText}>Please enter a year and tap search.</Text>
+            <Text style={bodyText}>
+              Please enter a year and tap search.
+            </Text>
           </Text>
 
           <InputField
@@ -43,6 +47,7 @@ export default class Home extends React.Component {
             maxLength={4}
             returnKeyType={'next'}
             onChangeText={inputYear => {
+              if (inputYear.length > 3) { Keyboard.dismiss() }
               this.setState({inputYear})
             }}
             label={'Year'}
@@ -65,31 +70,19 @@ export default class Home extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: '#1c1f24',
     alignItems: 'center',
     justifyContent: 'center',
-    // borderWidth: 3,
-    // borderColor: 'blue',
   },
 
   buttonContainerStyle: {
     paddingTop: 15,
-    // height: 50,
     width: 100,
-    // alignSelf: 'center',
-    // alignItems: 'center'
-    // flex: 1,
-    // borderWidth: 3,
-    // borderColor: 'blue',
   },
 
   textStyle: {
     color: "#5b6073",
     fontSize: 20,
     textAlign: 'center',
-    // flex: 1,
-    // borderWidth: 3,
-    // borderColor: 'blue',
   },
 
   headingStyle: {
@@ -99,4 +92,4 @@ const styles = StyleSheet.create({
   bodyText: {
     fontSize: 20
   },
-});
+})
