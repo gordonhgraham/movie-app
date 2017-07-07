@@ -12,15 +12,10 @@ export default class MovieTile extends React.Component {
   }
 
   render () {
-    const {
-      containerStyle,
-      copyStyle,
-      imgContainerStyle,
-      headingStyle,
-    } = styles
+    const { container, headingStyle, } = styles
 
     return (
-      <TouchableOpacity style={containerStyle} onPress={this.props.onPress}>
+      <TouchableOpacity style={container} onPress={this.props.onPress}>
         <Image
           style={{
             // h=1.5185w
@@ -38,7 +33,7 @@ export default class MovieTile extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  containerStyle: {
+  container: {
     borderWidth: 1,
     borderRadius: 2,
     borderColor: '#ddd',

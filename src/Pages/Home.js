@@ -21,7 +21,7 @@ export default class Home extends React.Component {
     const { navigate } = this.props.navigation
     const {
       container,
-      buttonContainerStyle,
+      buttonContainer,
       textStyle,
       headingStyle,
       bodyText,
@@ -53,7 +53,7 @@ export default class Home extends React.Component {
             label={'Year'}
           />
 
-          <View style={buttonContainerStyle}>
+          <View style={buttonContainer}>
             <Button
               onPress={()=> {
                 navigate('MovieList', { inputYear: this.state.inputYear })
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 
-  buttonContainerStyle: {
+  buttonContainer: {
     paddingTop: 15,
     width: 100,
   },

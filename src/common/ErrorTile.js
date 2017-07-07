@@ -4,10 +4,19 @@ import { View, Text } from 'react-native'
 import { Button } from './index.js'
 
 const ErrorTile = (props) => {
+  const {
+    container,
+    textStyle,
+    buttonContainer,
+  } = styles
+
   return (
-    <View style={styles.containerStyle}>
-      <Text style={styles.textStyle}>No movies to show.{'\n'}{'\n'}Please search another year.</Text>
-      <View style={styles.buttonContainerStyle}>
+    <View style={container}>
+      <Text style={textStyle}>
+        No movies to show.{'\n'}{'\n'}
+        Please search another year.
+      </Text>
+      <View style={buttonContainer}>
         <Button
           onPress={props.onPress}
         >Go Back</Button>
@@ -17,14 +26,14 @@ const ErrorTile = (props) => {
 }
 
 const styles = {
-  containerStyle: {
+  container: {
     alignItems: 'center',
   },
   textStyle: {
     fontSize: 20,
     textAlign: 'center',
   },
-  buttonContainerStyle: {
+  buttonContainer: {
     paddingTop: 20,
     width: 100,
   }

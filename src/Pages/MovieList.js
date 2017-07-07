@@ -59,7 +59,8 @@ export default class MovieList extends React.Component {
   }
 
   render() {
-    const { navigate, goBack } = this.props.navigation
+    const { navigate, goBack, } = this.props.navigation
+    const { container } = styles
 
     if (this.state.isLoading) {
       return (
@@ -68,13 +69,13 @@ export default class MovieList extends React.Component {
     }
     else if (this.state.dataSource.getRowCount() == 0) {
       return (
-        <View style={styles.container}>
+        <View style={container}>
           <ErrorTile onPress={() => goBack()}/>
         </View>
       )
     } else {
       return (
-        <View style={styles.container}>
+        <View style={container}>
           <ListView
             dataSource={this.state.dataSource}
             pageSize={10}
