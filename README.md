@@ -4,6 +4,7 @@ Below you'll find information about performing common build tasks. The most rece
 
 ## Table of Contents
 
+* [Adding TMDb API Key](#adding-tmdb-api-key)
 * [Available Scripts](#available-scripts)
   * [npm start](#npm-start)
   * [npm run ios](#npm-run-ios)
@@ -14,6 +15,18 @@ Below you'll find information about performing common build tasks. The most rece
   * [iOS Simulator won't open](#ios-simulator-wont-open)
   * [QR Code does not scan](#qr-code-does-not-scan)
 
+
+## Adding TMDb API Key
+
+When building the project you will need to include your API Key from [The Movie Database](http://themoviedb.org). Please see their [developer documentation](https://developers.themoviedb.org/3/getting-started) on obtaining an API Key.
+
+After obtaining an API Key it will need to be placed in a `config.js` file in the root directory of your project. Copy the code below, replace with your key, and save in `config.js`.
+
+```
+export default Config = {
+  api_Key: "YOUR_API_KEY_HERE"
+}
+```
 
 ## Available Scripts
 
