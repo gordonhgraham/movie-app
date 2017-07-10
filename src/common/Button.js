@@ -20,10 +20,8 @@ const styles = {
     fontWeight: '600',
     paddingTop: 6,
     paddingBottom: 6,
-    // fontFamily: 'Thonburi-Bold',
   },
   buttonStyle: {
-    // flex: 1,
     alignSelf: 'stretch',
     backgroundColor: '#000000',
     borderRadius: 5,
