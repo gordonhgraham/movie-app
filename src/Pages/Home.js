@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, Keyboard, TouchableWithoutFeedback, Image } from 'react-native'
+import { StyleSheet, Text, View, Keyboard, TouchableWithoutFeedback, Image, Linking } from 'react-native'
 import { StackNavigator } from 'react-navigation'
 
 import { Button, InputField } from '../common'
@@ -71,6 +71,10 @@ export default class Home extends React.Component {
             <Text style={textStyle}>
               This product uses the TMDb API but is not endorsed or certified by TMDb.
             </Text>
+            <Text
+              style={{ color: 'blue' }}
+              onPress={() => Linking.openURL('https://themoviedb.org')}
+            >themoviedb.org</Text>
           </View>
         </View>
       </TouchableWithoutFeedback>
