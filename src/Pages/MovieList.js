@@ -27,7 +27,7 @@ export default class MovieList extends React.Component {
   })
 
   getMovies() {
-    return fetch(`https://api.themoviedb.org/3/discover/movie?api_key=0b4f3a454dd18a72ed1326662f78ae4c&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${this.state.pageNum+1}&primary_release_year=${this.state.inputYear}`)
+    return fetch(`https://api.themoviedb.org/3/discover/movie?api_key=0b4f3a454dd18a72ed1326662f78ae4c&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${this.state.pageNum+1}&primary_release_date.gte=${this.state.inputYear}-01-01&primary_release_date.lte=${this.state.inputYear}-12-31`)
       .then((response) => response.json())
       .then((responseJson) => {
         let newData =
