@@ -59,7 +59,7 @@ export default class Movie extends React.Component {
   }
 
   componentDidMount() {
-    return fetch(`https://api.themoviedb.org/3/movie/${this.state.movieData.id}?api_key=${Config.api_Key}&language=en-US&append_to_response=credits`)
+    return fetch(`https://api.themoviedb.org/3/movie/${this.state.movieData.id}?api_key=0b4f3a454dd18a72ed1326662f78ae4c&language=en-US&append_to_response=credits`)
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({
