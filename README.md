@@ -4,11 +4,11 @@ Below you'll find information about performing common build tasks. The most rece
 
 ## Table of Contents
 
-* [Adding TMDb API Key](#adding-tmdb-api-key)
-* [Available Scripts](#available-scripts)
+* [Available Scripts](#available-scripts-master)
   * [npm start](#npm-start)
   * [npm run ios](#npm-run-ios)
   * [npm run android](#npm-run-android)
+* [Available Scripts to build on Eject Branch](#available-scripts-eject)
 * [Configuring Packager IP Address](#configuring-packager-ip-address)
 * [Troubleshooting](#troubleshooting)
   * [Networking](#networking)
@@ -16,19 +16,9 @@ Below you'll find information about performing common build tasks. The most rece
   * [QR Code does not scan](#qr-code-does-not-scan)
 
 
-## Adding TMDb API Key
+## Available Scripts Master
 
-When building the project you will need to include your API Key from [The Movie Database](http://themoviedb.org). Please see their [developer documentation](https://developers.themoviedb.org/3/getting-started) on obtaining an API Key.
-
-After obtaining an API Key it will need to be placed in a `config.js` file in the root directory of your project. Copy the code below, replace with your key, and save in `config.js`.
-
-```
-export default Config = {
-  api_Key: "YOUR_API_KEY_HERE"
-}
-```
-
-## Available Scripts
+If using [Expo app](https://expo.io) to build and run these scrips are available on the master branch. To build and run the app in a native emulator checkout EJECT branch. [Link to available scripts](#available-scripts-eject)
 
 If Yarn was installed when the project was initialized, then dependencies will have been installed via Yarn, and you should probably use it to run these commands as well. Unlike dependency installation, command running syntax is identical for Yarn and NPM at the time of this writing.
 
@@ -64,6 +54,16 @@ Like `npm start`, but also attempts to open your app on a connected Android devi
 1. Find Genymotion’s copy of adb. On macOS for example, this is normally `/Applications/Genymotion.app/Contents/MacOS/tools/`.
 2. Add the Genymotion tools directory to your path (instructions for [Mac](http://osxdaily.com/2014/08/14/add-new-path-to-path-command-line/), [Linux](http://www.computerhope.com/issues/ch001647.htm), and [Windows](https://www.howtogeek.com/118594/how-to-edit-your-system-path-for-easy-command-line-access/)).
 3. Make sure that you can run adb from your terminal.
+
+## Available Scripts Eject
+
+After checking out the Eject branch you can build the react native project and run it on your devices. See the [React Native Documentation](https://facebook.github.io/react-native/docs/running-on-device.html) for more details.
+
+`react-native run-ios`
+Attempt to open iOS Simulator then run app if you are on mac and have a simulator installed.
+
+`react-native run-android`
+Attempt to run on Android simulator if you have one running.
 
 ## Configuring Packager IP Address
 
