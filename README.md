@@ -57,7 +57,7 @@ Like `npm start`, but also attempts to open your app on a connected Android devi
 
 ## Available Scripts Eject
 
-After checking out the Eject branch you can build the react native project and run it on your devices. See the [React Native Documentation](https://facebook.github.io/react-native/docs/running-on-device.html) for more details.
+After checking out the EJECT branch you can build the react native project and run it on your devices. See the [React Native Documentation](https://facebook.github.io/react-native/docs/running-on-device.html) for more details.
 
 `react-native run-ios`
 Attempt to open iOS Simulator then run app if you are on mac and have a simulator installed.
